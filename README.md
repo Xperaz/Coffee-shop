@@ -160,5 +160,4 @@ document.addEventListener("touchstart", function(e) {
 Adding type module we turn all project in form of modules, Because if We are not using modules
 in javscript everything is global, that's can lead to conflicts between variables (global ones).
 So by using module each file has its own context.
-=======
->>>>>>> 56670d785e23c47041e13e15b74078caab18ebb6
+
