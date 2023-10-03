@@ -72,6 +72,27 @@ element.dispatchEvent(event);
 
 > In the code above we dispatch events over an element.
 
+### Routing using History API
+
+The History API provides access to the browser's session history (not to be confused with WebExtensions history) through the history global object. It exposes useful methods and properties that let you navigate back and forth through the user's history, and manipulate the contents of the history stack.
+
+```
+// pushing a new URL; the second argument is unused
+history.pushState(optional_state, null, "/new-url");
+// to listen for changes in URL within the same page navigation
+window.addEventListener("popstate", event => {
+ let url = location.href;
+});
+
+```
+
+>**optional_state**: An optional state object, where we can pass metadata or anything that can be serialized.
+>**null**: This parameter exists for historical reasons, and cannot be omitted; passing an empty string is safe against future changes to the method.
+>**new-url**: The new history entry's URL. Its client side only url, that's why we call it "fake url"!.
+
+> [!WARNING]
+> **Popstate** won't be fired if the user clicks on an external link or changes the URL manually. because history api work using history of our app.
+
 ## Q And A?
 
 1. Why should you put a script tag in the bottom of the body and why do we use defer or async?
@@ -151,7 +172,6 @@ document.addEventListener("touchstart", function(e) {
 ```
 
 > Once and passive are Advanced Event Handling.
-<<<<<<< HEAD
 
 4. Why we use type module in our script tag?
 
@@ -160,5 +180,3 @@ document.addEventListener("touchstart", function(e) {
 Adding type module we turn all project in form of modules, Because if We are not using modules
 in javscript everything is global, that's can lead to conflicts between variables (global ones).
 So by using module each file has its own context.
-=======
->>>>>>> 56670d785e23c47041e13e15b74078caab18ebb6
