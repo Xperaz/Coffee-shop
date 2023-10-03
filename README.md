@@ -35,33 +35,33 @@ because the DOM API  is not just available in the document object, but also avai
 
 ### "DOMContentLoaded"
 
-**DOMContentLoaded** is an event we will need it when we use defer or async to make sure that the dom is ready for manipulation, because in some browser even if parser has finished but DOM structure in memory is not finished yet, that's rarely happen but it can happen, so we make sure that DOM is ready or not by ```DOMContentLoaded``` event.
-> more about async and defer in Q And A section.
-> Defferent between load event and DOMContentLoaded event also in Q And A section.
+**DOMContentLoaded** is an event that we will need when we use defer or async to make sure that the DOM is ready for manipulation because in some browsers even if the parser has finished but the DOM structure in memory is not finished yet, that's rarely happening but it can happen, so we make sure that DOM is ready or not by ```DOMContentLoaded``` event.
+> More about async and defer in the Q And A section.<br/>
+> Difference between load event and DOMContentLoaded event also in Q And A section.
 
 ### Event binding
 
-The event binding allows you to add an event handler for a specified event so that your chosen JavaScript function will be invoked when that event is triggered for the associated DOM element. This can be used to bind to any event, such as keypress, mouseover or mouseout.
+The event binding allows you to add an event handler for a specified event so that your chosen JavaScript function will be invoked when that event is triggered for the associated DOM element. This can be used to bind to any event, such as keypress, mouseover, or mouseout.
 
 #### Binding functions to events in DOM objects
 
 Events are signals fired inside the browser window that notify of changes in the browser or operating system environment. Programmers can create event handler code that will run when an event fires, allowing web pages to respond appropriately to change.
 
-To bind functions to event in DOM objects there are two ways:
+To bind functions to events in DOM objects there are two ways:
 
 - onevent properties: (named by prefixing "on" to the name of the event). These properties are called to run associated handler code when the event is fired, and may also be called directly by your own code.
 
 - addEventListener: The addEventListener() method of the EventTarget interface sets up a function that will be called whenever the specified event is delivered to the target.
 
-> Check Q And A for defference between the Two.
+> Check Q And A for the difference between the Two.
 
 ### Dispatching Custom Events
 
-We can not only assign handlers, but also generate our events from JavaScript.
+We can not only assign handlers but also generate our own events from JavaScript.
 
-Custom events can be used to create “graphical components”. For instance, a root element of our own JS-based menu may trigger events telling what happens with the menu: open (menu open), select (an item is selected) and so on. Another code may listen for the events and observe what’s happening with the menu.
+Custom events can be used to create “graphical components”. For instance, a root element of our own JS-based menu may trigger events telling what happens with the menu: open (menu open), select (an item is selected), and so on. Another code may listen to the events and observe what’s happening with the menu.
 
-We can generate not only completely new events, that we invent for our own purposes, but also built-in ones, such as click, mousedown etc. That may be helpful for automated testing.
+We can generate not only completely new events, that we invent for our own purposes, but also built-in ones, such as click, mouse down, etc. That may be helpful for automated testing.
 
 ```
 
@@ -70,7 +70,7 @@ element.dispatchEvent(event);
 
 ```
 
-> In the code above we dispatch event over an element.
+> In the code above we dispatch events over an element.
 
 ## Q And A?
 
@@ -78,7 +78,7 @@ element.dispatchEvent(event);
 
  Notice: using script tag at the bottom of the body now is deprecated,
  but the reason why we put the script tag at the bottom of HTML in the past is that when the browser is parsing the HTML line by line when it finds the script tag it stops parsing 
- and try to execute a javascript file, so the user should wait until the browser execute javascript so he can see some UI, which we put in the bottom to make HTML and CSS 
+ and try to execute a javascript file, so the user should wait until the browser executes javascript so he can see some UI, which we put in the bottom to make HTML and CSS 
  load first, then start executing the javascript code.
 
  now we are using defer or async: the parser when it finds the script tag with defer will download the file but it will continue parsing the HTML file when it parses 
@@ -87,11 +87,11 @@ element.dispatchEvent(event);
  async is more suitable for small scripts, that need to be executed as soon as possible because async downloads the js file but when the file is ready it will stop 
  parsing and start executing the js file so Asyn doesn't help to parse too much, if you don't really know which one should use, use defer.
 
-2. Defference between load event and DOMContentLoaded event?
+2. Difference between the load event and the DOMContentLoaded event?
 
-The load waits for everything in the page to be loaded (vidos, fonts, images...) so we miss opportunity to manipulate the DOM earlier. DOMContentLoaded event is soon as possible event if some parts didn't loaded yet we can manipulate the DOM => so best option is to use DOMContentLoaded.
+The load waits for everything on the page to be loaded (videos, fonts, images...) so we miss the opportunity to manipulate the DOM earlier. DOMContentLoaded event is a soon as possible event, if some parts haven't loaded yet we can manipulate the DOM => so the best option is to use DOMContentLoaded.
 
-3. Deffrence between onevent and addEventListener?
+3. Difference between onevent and addEventListener?
 
 When we use ``` onevent ``` technique, only one function can be attached per event/object combination:
 
@@ -103,13 +103,13 @@ When we use ``` onevent ``` technique, only one function can be attached per eve
     element.onload = eventHandler;
 
     element.onload = (event) => {
-        // it replace the first handler, because its property so it uses setter and getter,
-        // there is place for only one event handler
+        //It replaces the first handler, and its property so it uses a setter and getter,
+        //There is place for only one event handler
     }
 
 ```
 
-but for ``` addEventListener ``` it's using the observer design pattern, where i can subscribe a lot of listeners or observers and all of them will be fire, Also ``` addEventListener ``` supports more advanced event handling.
+but for ``` addEventListener ``` it uses the observer design pattern, where I can subscribe a lot of listeners or observers and all of them will be fired, Also ``` addEventListener ``` supports more advanced event handling.
 
 ```
  function eventHandler(event) {
@@ -127,10 +127,12 @@ but for ``` addEventListener ``` it's using the observer design pattern, where i
 
 ```
 
-> For example in above code we can pass a third argument with some options, like option once i can use it to trigger event only once so when event happen i will turn to false iside event handler.
-> For passive option, It enables developers to opt-in to better scroll performance by eliminating the need for scrolling to block on touch and wheel event listeners.
+> For example in the above code we can pass a third argument with some options, like an option ```once``` I can use it to trigger an event only once so when the event happens I will turn to a false inside event handler.<br/>
+> For the passive option, enables developers to opt-in to better scroll performance by eliminating the need for scrolling to block on touch and wheel event listeners<br/>.
 
-**Problem**: All modern browsers have a threaded scrolling feature to permit scrolling to run smoothly even when expensive JavaScript is running, but this optimization is partially defeated by the need to wait for the results of any touchstart and touchmove handlers, which may prevent the scroll entirely by calling preventDefault() on the event.
+**_More About Passive_**
+
+**Problem**: All modern browsers have a threaded scrolling feature to permit scrolling to run smoothly even when expensive JavaScript is running, but this optimization is partially defeated by the need to wait for the results of any ```touchstart``` and ```touchmove``` handlers, which may prevent the scroll entirely by calling preventDefault() on the event.<br/>
 
 **Solution: {passive: true}**
 
@@ -148,4 +150,12 @@ document.addEventListener("touchstart", function(e) {
 
 ```
 
-> once and passive are Advanced Event Handling.
+> Once and passive are Advanced Event Handling.
+
+4. Why we use type module in our script tag?
+
+```<script src="app.js" defer type="module"></script>```
+
+Adding type module we turn all project in form of modules, Because if We are not using modules
+in javscript everything is global, that's can lead to conflicts between variables (global ones).
+So by using module each file has its own context.
