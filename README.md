@@ -93,6 +93,37 @@ window.addEventListener("popstate", event => {
 > [!WARNING]
 > **Popstate** won't be fired if the user clicks on an external link or changes the URL manually. because history api work using history of our app.
 
+### Web Component
+
+Web components are a set of browser APIs that you can use to create your own custom HTML elements.
+It's actually a set of standards:
+  - Custom Elements
+  - HTML Templates
+  - Shadow DOM
+  - Declarative Shadow DOM (new)
+
+  - **Custom Elelments**
+
+  A way to define new, reusable HTML elements with custom behavior and functionality using JavaScript.
+  ex: (page 114 in pdf slides).
+
+  - **Template Element**
+
+  Fragments of markup that can be cloned and inserted into the document at runtime, with reusable HTML content that can be rendered and modified dynamically (using javascript, The parser ignore template because it conseder it as script).
+  It's a way that we have to define the HTML of a web component in HTML file from javascript and inject it in DOM.
+  ex: (page 121)
+
+  - **Shadow DOM**
+  A private, isolated DOM tree within a web component that is separate from the main document's DOM tree.
+  ex: (page 126).
+
+  - **Declarative Shadow DOM**
+  A way to define Shadow DOM directly in HTML markup using a new set of attributes and tags.
+  > [!WARNING]
+  > It's not supported by the most browser at the moment
+
+The mix of ```custom element```, ```template``` using template string, and ```shadow DOM```, The three in action what we know as a Web component.
+
 ## Q And A?
 
 1. Why should you put a script tag in the bottom of the body and why do we use defer or async?
