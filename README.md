@@ -124,6 +124,14 @@ It's actually a set of standards:
 
 The mix of ```custom element```, ```template``` using template string, and ```shadow DOM```, The three in action what we know as a Web component.
 
+### Reactive Programming with Proxies
+
+**Proxy** : A wrapper object that lets you intercept and modify operations performed on the wrapped object, allowing you to  add custom behavior or validation to the object's properties and methods.
+
+> In simple terms: It's a simple way that we have in Javascript to listen for changes in an object.
+
+For more info have a look to silde 135 in pdf.
+
 ## Q And A?
 
 1. Why should you put a script tag in the bottom of the body and why do we use defer or async?
