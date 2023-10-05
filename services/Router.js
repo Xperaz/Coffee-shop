@@ -1,49 +1,59 @@
 const Router = {
     init: () => {
-        document.querySelectorAll("a.navlink").forEach(link => {
-            link.addEventListener("click", event => {
+        document.querySelectorAll("a.navlink").forEach(a => {
+            a.addEventListener("click", event => {
                 event.preventDefault();
-                const url = link.getAttribute("href");
-                Router.go(url);
-            })
-        });
-        // Evnet Handler for URL changes => change content according to url (forward and backward)
-        window.addEventListener("popstate", event  => {
+                const href = event.target.getAttribute("href");
+                Router.go(href);
+            });
+        });  
+        // It listen for history changes
+        window.addEventListener('popstate',  event => {
             Router.go(event.state.route, false);
         });
-
-        // check the initial URL
+        // Process initial URL   
         Router.go(location.pathname);
-    },
+    },    
     go: (route, addToHistory=true) => {
-        if (addToHistory){
-            history.pushState({ route }, null, route)
+        if (addToHistory) {
+            history.pushState({ route }, '', route);
         }
         let pageElement = null;
-        switch(route) {
+        switch (route) {
             case "/":
                 pageElement = document.createElement("menu-page");
                 break;
             case "/order":
-                pageElement = document.createElement("order-page");;
+                pageElement = document.createElement("order-page");
                 break;
             default:
-                if (route.startsWith("/product-")){
+                if (route.startsWith("/product-")) {                
                     pageElement = document.createElement("details-page");
-                    // extract product id from route
-                    const paramId = route.substring(route.lastIndexOf("-") + 1);
-                    pageElement.dataset.id = paramId;
+                    pageElement.dataset.productId = route.substring(route.lastIndexOf("-")+1);
                 }
-                break;
+                break;   
         }
-        const cach = document.querySelector("main");
-        // remove previous content from the dom
-        if (cach.children[0]){
-            cach.children[0].remove();
+        if (pageElement) {
+            // get current page element            
+            let currentPage = document.querySelector("main").firstElementChild; 
+            if (currentPage) {
+                let fadeOut = currentPage.animate([
+                    {opacity: 1}, {opacity: 0}
+                ],{ duration: 200});
+                fadeOut.addEventListener("finish", () => {
+                    currentPage.remove();
+                    document.querySelector("main").appendChild(pageElement);
+                    let fadeIn = pageElement.animate([
+                        {opacity: 0}, {opacity: 1}
+                    ],{ duration: 200});
+                });
+            } else {
+                document.querySelector("main").appendChild(pageElement);
+            }
+
         }
-        cach.appendChild(pageElement);
+
         window.scrollX = 0;
-        window.scrollY = 0;
     }
 }
 
