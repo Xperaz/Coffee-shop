@@ -1,5 +1,7 @@
 # Coffee-shop using vanilla javascript
 
+Build Coffee shop website using vanilla javascript
+
 ## DOM
 
 **DOM**: The Document Object Model connects web pages to JavaScript by representing the structure of a document in memory.
